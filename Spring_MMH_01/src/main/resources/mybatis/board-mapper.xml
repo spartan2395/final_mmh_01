@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="">
+  <!-- resultMap 타입, id / 그 안에 result의 property, column-->
+  
+  <!-- crud관련 태그와 쿼리문 -->
+  
+  
+</mapper>

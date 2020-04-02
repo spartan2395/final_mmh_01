@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+<!-- enviroment는 Spring이 applicationContext에서 알아서 설정해줄거에요. -->
+
+	<!-- typeAliases, type은 경로, alias는 별칭 -->
+
+<!-- 스프링에서 resource라는 글이 보이면, src/main/resources부터 검색 -->	
+	<!-- resource="/경로/이름-mapper.xml" -->
+</configuration>
