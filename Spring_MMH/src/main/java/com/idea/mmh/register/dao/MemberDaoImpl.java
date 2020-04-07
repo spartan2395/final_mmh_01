@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,12 +12,9 @@ import com.idea.mmh.register.dto.MemberDto;
 @Repository
 public class MemberDaoImpl implements MemberDao {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberDaoImpl.class);
-	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	
 	@Override
 	public List<MemberDto> selectList() {
 		List<MemberDto> list = new ArrayList<MemberDto>();
@@ -27,7 +22,7 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectList");
 		} catch (Exception e) {
-			System.out.println("[MemeberDaoImpl ERROR] : selectList");
+			System.out.println("[ERROR] : selectList");
 			e.printStackTrace();
 		}
 
@@ -35,16 +30,10 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public MemberDto selectOne(int m_no) {
-		MemberDto rs = null;
+	public MemberDto selectOne(int myno) {
+
 		
-		try {
-			rs = sqlSession.selectOne(NAMESPACE+ "selectOne");
-		} catch (Exception e) {
-			logger.info("[MemeberDaoImpl ERROR] : selectOne");
-			e.printStackTrace();
-		}
-		return rs;
+		return null;
 	}
 
 	@Override
