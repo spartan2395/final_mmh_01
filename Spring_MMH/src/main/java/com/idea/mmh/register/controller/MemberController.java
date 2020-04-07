@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.idea.mmh.model.biz.LoginBiz;
-import com.idea.mmh.model.dto.LoginDto;
 import com.idea.mmh.register.biz.MemberBiz;
 import com.idea.mmh.register.dto.MemberDto;
 
@@ -32,9 +28,6 @@ public class MemberController {
 
 	@Autowired
 	private MemberBiz biz;
-	
-	@Autowired
-	private LoginBiz loginbiz;
 	
 	@Autowired
 	public JavaMailSender emailSender;
@@ -54,7 +47,7 @@ public class MemberController {
 	// insert가 안되면, 회원가입form화면으로 전환
 	@RequestMapping(value = "/sign.do", method = RequestMethod.POST)
 	public String insert(MemberDto dto) {
-		logger.info("select list");
+		logger.info("insert ");
 
 		int res = biz.insert(dto);
 
@@ -132,14 +125,14 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
-		return "redirect:index.do";
+		return "redirect:admin_main.do";
 	}
 	
 	
 	
 	@RequestMapping(value = "/loginajax.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Boolean> loginAjax(HttpSession session,@RequestBody MemberDto dto, HttpSession user){
+	public Map<String, Boolean> loginAjax(HttpSession session,@RequestBody MemberDto dto){
 		logger.info("login ajax");
 		
 		/*
@@ -147,14 +140,14 @@ public class MemberController {
 		 * @ResponseBody : java 객체를 response 객체에 binding
 		 */
 		
+		System.out.println("\nLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLogin\n");
+		
 		MemberDto res = biz.login(dto);
 		System.out.println(res.getM_id()+"컨트롤러다");
 		boolean check = false;
 		boolean admin = true;
 		if(res != null) {
 			session.setAttribute("login", res);
-			user.setAttribute("dto", res);
-//			user.setAttribute("dto", res);			//왜 HttpSession이 두개지?
 			check = true;
 			if(res.getM_grade().equals("A")) {
 				admin=true;
@@ -182,49 +175,6 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value = "kakaologin.do")
-	@ResponseBody
-	public String kakaoLogin(LoginDto dto , HttpSession session) {
-		Map<String, String> map = new HashMap<String, String>();
-		ObjectMapper mapper = new ObjectMapper();
-		
-		System.out.println("eee");
-		System.out.println(dto.getM_email());
-		int res = 0;
-		LoginDto info = loginbiz.snsLogin(dto);
-		if(info == null) {
-			res = loginbiz.snslogin_reg(dto.getM_email());
-			info = loginbiz.snsLogin(dto);
-		}
-		session.setAttribute("dto", info);
-		try {
-			map.put("dto", mapper.writeValueAsString(info));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(info.getM_email());
-		System.out.println(map.get("dto"));
-		if(info.getM_name() == null) {
-			map.put("key", "N");
-			
-			try {
-				return mapper.writeValueAsString(map);
-			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else {
-			map.put("key", "Y");
-		}
-		try {
-			return mapper.writeValueAsString(map);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "";
-	}
 
  
  
