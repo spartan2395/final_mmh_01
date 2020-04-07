@@ -12,11 +12,10 @@
 		<result property="m_address2" column="M_ADDRESS2" />
 		<result property="m_join" column="M_JOIN" />
 		<result property="m_grade" column="M_GRADE" />
-		<result property="m_payment" column="M_PAYMENT" />
 	</resultMap>
 	<select id="selectList" resultMap="memberMap">
 		SELECT 
-			M_NO, M_ID, M_PW, M_NAME, M_EMAIL, M_ADDRESS, M_ADDRESS2, M_JOIN, M_GRADE, M_PAYMENT
+			M_NO, M_ID, M_PW, M_NAME, M_EMAIL, M_ADDRESS, M_ADDRESS2, M_JOIN, M_GRADE
 		FROM 
 			MMH_MEMBER
 		ORDER BY M_NO DESC
@@ -24,7 +23,7 @@
 
 	<select id="selectOne" resultMap="memberMap" parameterType="int">
 		SELECT 
-				M_NO, M_ID, M_PW, M_NAME, M_EMAIL, M_ADDRESS, M_ADDRESS2, M_JOIN, M_GRADE, M_PAYMENT
+				M_NO, M_ID, M_PW, M_NAME, M_EMAIL, M_ADDRESS, M_ADDRESS2, M_JOIN, M_GRADE
 		FROM 
 			MMH_MEMBER
 		WHERE 
@@ -35,7 +34,7 @@
 		INSERT INTO 
 					MMH_MEMBER
 		VALUES(
-				MMH_MEMBER_SEQ.NEXTVAL, #{m_id}, #{m_pw}, #{m_name}, #{m_email}, #{m_address}, #{m_address2}), 'Y', 'A', 'Y')
+				MMH_MEMBER_SEQ.NEXTVAL, #{m_id}, #{m_pw}, #{m_name}, #{m_email}, #{m_address}, 'Y', 'A', #{m_address2})
 	</insert>
 
 	<update id="update" parameterType="memberDto">
@@ -60,6 +59,12 @@
 			SELECT M_ID FROM MMH_MEMBER
 			WHERE M_ID = #{m_id}
 	</select>
+
+
+
+
+
+
 
 	<select id="login" parameterType="memberDto" resultType="memberDto">
 		SELECT M_NO, M_ID, M_PW, M_NAME, M_EMAIL, M_ADDRESS, M_JOIN, M_GRADE, M_ADDRESS2

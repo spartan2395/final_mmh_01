@@ -13,24 +13,22 @@ public class NoteDto {
 	private String nwriter;
 
 	private String ncontent;
+
 	
-	private String ntoday;
+	
 	
 	public NoteDto() {
 		super();
 	}
 
-	public NoteDto(int opno, int nno, String ntitle, String nwriter, String ncontent, String ntoday) {
+	public NoteDto(int opno, int nno, String ntitle, String nwriter, String ncontent) {
 		super();
 		this.opno = opno;
 		this.nno = nno;
 		this.ntitle = ntitle;
 		this.nwriter = nwriter;
 		this.ncontent = ncontent;
-		this.ntoday = ntoday;
 	}
-
-
 
 	public int getOpno() {
 		return opno;
@@ -72,24 +70,10 @@ public class NoteDto {
 		this.ncontent = ncontent;
 	}
 
-	
-	public String getNtoday() {
-		return ntoday;
-	}
-
-	public void setNtoday(String ntoday) {
-		this.ntoday = ntoday;
-	}
-
 	@Override
 	public String toString() {
 		return "NoteDto [opno=" + opno + ", nno=" + nno + ", ntitle=" + ntitle + ", nwriter=" + nwriter + ", ncontent="
-				+ ncontent + ", ntoday=" + ntoday + "]";
+				+ ncontent + "]";
 	}
-
-	
-	
-	
-	
 
 }
